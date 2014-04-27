@@ -4,6 +4,7 @@ CollectionDriver = function(db) {
 	this.db = db;
 };
 
+//find a collection by name
 CollectionDriver.prototype.getCollection = function(collectionName, callback) {
 	this.db.collection(collectionName, function(error, the_collection) {
 		if (error) {
@@ -14,6 +15,7 @@ CollectionDriver.prototype.getCollection = function(collectionName, callback) {
 	});
 };
 
+//return all entities in a collection
 CollectionDriver.prototype.findAll = function(collectionName, callback) {
 	this.getCollection(collectionName, function(error, the_collection) {
 		if (error) {
@@ -30,6 +32,7 @@ CollectionDriver.prototype.findAll = function(collectionName, callback) {
 	});
 }
 
+//return a specific entity by _id in a collection
 CollectionDriver.prototype.get = function(collectionName, id, callback) {
 	this.getCollection(collectionName, function(error, the_collection) {
 		if (error) {
