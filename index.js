@@ -1,5 +1,6 @@
 var http = require('http'),
 	express = require('express'),
+	bodyParser = require('body-parser');
 	path = require('path'),
 	MongoClient = require('mongodb').MongoClient,
 	Server = require('mongodb').Server,
@@ -12,7 +13,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 //parse incoming request bodies into JSON
-app.use(express.bodyParser());
+app.use(bodyParser());
 
 //serve static files under the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
