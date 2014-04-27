@@ -7,5 +7,9 @@
 		"body-parser": "*",
 		"jade": "*",
 		"mongodb": "*"
-	}
+	},
+	"repository": {
+	    "type": "git",
+	    "url": "https://github.com/patrickGoley/MongoServer.git"
+	 }
 }
