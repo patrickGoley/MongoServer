@@ -11,6 +11,13 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+//parse incoming request bodies into JSON
+app.use(express.bodyParser());
+
+//serve static files under the 'public' directory
+app.use(express.static(path.join(__dirname, 'public')));
+
+
 var mongoHost = 'localHost';
 var mongoPort = 27017;
 var collectionDriver;
@@ -26,8 +33,6 @@ mongoClient.open(function(err, mongoClient) {
 	collectionDriver = new CollectionDriver(db);
 });
 
-//serve static files under the 'public' directory
-app.use(express.static(path.join(__dirname, 'public')));
 
 //return all entities for the given collection
 app.get('/:collection', function(req, res) {
