@@ -2,7 +2,9 @@
 	"name": "mongo-server",
 	"version": "0.0.1",
 	"private": true,
-	"main": "index.js",
+	"scripts": {
+	    "start": "index.js"
+	},
 	"dependencies": {
 		"express": "*",
 		"body-parser": "*",
