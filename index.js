@@ -83,6 +83,41 @@ app.post('/:collection', function(req, res) {
 	});
 });
 
+//update an existing object
+app.put('/:collection/:entity', function(req, res) {
+	var params = req.params;
+	var entity = params.entity;
+	var collection = params.collection;
+	if (entity) {
+		collectionDriver.update(collection, req.body, entity, function(error, objs) {
+			if (error) {
+				res.send(400, error);
+			} else {
+				res.send(200, objs);
+			}
+		});
+	} else {
+		var error = { "message": "Cannot PUT a whole collection" };
+		res.send(400, error);
+	}
+});
+
+//delete a specific object
+app.delete("/:collection/:entity", function(req, res) {
+	var params = req.params;
+	var entity = params.entity;
+	var collection = params.collection;
+	if (entity) {
+		collectionDriver.delete(collection, entity, function(error, objs) {
+			if (error) {
+				res.send(400, error);
+			} else {
+				res.send(200, objs);
+			}
+		});
+	}
+});
+
 //return a 404 page for unhandled requests
 app.use(function (req,res) {
     res.render('404', {url:req.url}); 
