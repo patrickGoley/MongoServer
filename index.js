@@ -2,8 +2,7 @@ var http = require('http'),
 	express = require('express'),
 	bodyParser = require('body-parser');
 	path = require('path'),
-	MongoClient = require('mongodb').MongoClient,
-	Server = require('mongodb').Server,
+	mongo = require('mongodb');
 	CollectionDriver = require('./collectionDriver').CollectionDriver;
 
 var app = express();
@@ -24,15 +23,28 @@ var mongoPort = 27017;
 var collectionDriver;
 
 //set up the mongodb collection driver
-var mongoClient = new MongoClient(new Server(mongoHost, mongoPort));
-mongoClient.open(function(err, mongoClient) {
-	if (!mongoClient) {
-		console.error("Error! Exiting... Must start MongoDB first");
+var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/mydb';
+
+console.log("connecting to mongo db at " + mongoUri);
+
+mongo.Db.connect(mongoUri, function(err, db) {
+	if (err) {
+		console.error("error connecting to mongodb " + err);
 		process.exit(1);
 	}
-	var db = mongoClient.db("MyDatabase");
 	collectionDriver = new CollectionDriver(db);
 });
+
+//set up the mongodb collection driver
+// var mongoClient = new MongoClient(new Server(mongoHost, mongoPort));
+// mongoClient.open(function(err, mongoClient) {
+// 	if (!mongoClient) {
+// 		console.error("Error! Exiting... Must start MongoDB first");
+// 		process.exit(1);
+// 	}
+// 	var db = mongoClient.db("MyDatabase");
+// 	collectionDriver = new CollectionDriver(db);
+// });
 
 
 //return all entities for the given collection
