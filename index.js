@@ -5,6 +5,9 @@ var http = require('http'),
 	mongo = require('mongodb');
 	CollectionDriver = require('./collectionDriver').CollectionDriver;
 
+
+
+
 var app = express();
 
 app.set('port', process.env.PORT || 3000);
@@ -17,12 +20,8 @@ app.use(bodyParser());
 //serve static files under the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-var mongoHost = 'localHost';
-var mongoPort = 27017;
-var collectionDriver;
-
 //set up the mongodb collection driver
+var collectionDriver;
 var mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/mydb';
 
 console.log("connecting to mongo db at " + mongoUri);
@@ -34,18 +33,6 @@ mongo.Db.connect(mongoUri, function(err, db) {
 	}
 	collectionDriver = new CollectionDriver(db);
 });
-
-//set up the mongodb collection driver
-// var mongoClient = new MongoClient(new Server(mongoHost, mongoPort));
-// mongoClient.open(function(err, mongoClient) {
-// 	if (!mongoClient) {
-// 		console.error("Error! Exiting... Must start MongoDB first");
-// 		process.exit(1);
-// 	}
-// 	var db = mongoClient.db("MyDatabase");
-// 	collectionDriver = new CollectionDriver(db);
-// });
-
 
 //return all entities for the given collection
 app.get('/:collection', function(req, res) {
