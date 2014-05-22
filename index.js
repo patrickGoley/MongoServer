@@ -82,6 +82,31 @@ app.post('/:collection', function(req, res) {
 	});
 });
 
+app.post('/shares/:type', function(req, res) {
+	var object = req.body;
+	var collection = 'shares';
+	object.type = req.params.type;
+	collectionDriver.save(collection, object, function(err, docs) {
+		if (err) {
+			res.send(400, err);
+		} else {
+			res.send(201, docs);
+		}
+	});
+});
+
+// app.get('/shares/:type', function(req, res) {
+// 	var object = req.body;
+// 	var collection = 'shares';
+// 	collectionDriver.save(collection, object, function(err, docs) {
+// 		if (err) {
+// 			res.send(400, err);
+// 		} else {
+// 			res.send(201, docs);
+// 		}
+// 	});
+// });
+
 //update an existing object
 app.put('/:collection/:entity', function(req, res) {
 	var params = req.params;
