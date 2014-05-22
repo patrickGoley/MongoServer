@@ -82,10 +82,10 @@ app.post('/:collection', function(req, res) {
 	});
 });
 
+//curl -H "Content-Type: application/json" -X POST -d '{"title":"Hello Shares"}' http://young-reaches-3985.herokuapp.com/shares/generic
 app.post('/shares/:type', function(req, res) {
 	var object = req.body;
-	var collection = 'shares';
-	object.type = req.params.type;
+	var collection = 'shares_' + req.params.type;
 	collectionDriver.save(collection, object, function(err, docs) {
 		if (err) {
 			res.send(400, err);
@@ -95,17 +95,22 @@ app.post('/shares/:type', function(req, res) {
 	});
 });
 
-// app.get('/shares/:type', function(req, res) {
-// 	var object = req.body;
-// 	var collection = 'shares';
-// 	collectionDriver.save(collection, object, function(err, docs) {
-// 		if (err) {
-// 			res.send(400, err);
-// 		} else {
-// 			res.send(201, docs);
-// 		}
-// 	});
-// });
+app.get('/shares/:type', function(req, res) {
+	var object = req.body;
+	var collection = 'shares_' + req.params.type;
+	collectionDriver.findAll(req.params.collection, function(error, objs) {
+		if (error) {
+			res.send(400, error);
+		} else {
+			if (req.accepts('html')) {
+				res.render('data', {objects: objs, collection: req.params.collection});
+			} else {
+				res.set('Content-Type', 'application/json');
+				res.sent(200, objs);
+			}
+		}
+	});
+});
 
 //update an existing object
 app.put('/:collection/:entity', function(req, res) {
