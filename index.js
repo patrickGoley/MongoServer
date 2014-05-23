@@ -82,7 +82,7 @@ app.post('/:collection', function(req, res) {
 	});
 });
 
-//curl -H "Content-Type: application/json" -X POST -d '{"title":"Hello Shares"}' http://young-reaches-3985.herokuapp.com/shares/generic
+//curl -H "Content-Type: application/json" -X POST -d '{"title":"Hello Shares"}' http://young-reaches-3985.herokuapp.com/shares/general
 app.post('/shares/:type', function(req, res) {
 	var object = req.body;
 	var collection = req.params.type;
@@ -95,10 +95,11 @@ app.post('/shares/:type', function(req, res) {
 	});
 });
 
+//http://young-reaches-3985.herokuapp.com/shares/general
 app.get('/shares/:type', function(req, res) {
 	var object = req.body;
 	var collection = req.params.type
-	collectionDriver.findAll(req.params.collection, function(error, objs) {
+	collectionDriver.findAll(collection, function(error, objs) {
 		if (error) {
 			res.send(400, error);
 		} else {
