@@ -104,7 +104,7 @@ app.get('/shares/:type', function(req, res) {
 			res.send(400, error);
 		} else {
 			if (req.accepts('html')) {
-				res.render('data', {objects: objs, collection: req.params.collection});
+				res.render('data', {objects: objs, collection: collection});
 			} else {
 				res.set('Content-Type', 'application/json');
 				res.sent(200, objs);
