@@ -95,11 +95,31 @@ app.post('/shares/:type', function(req, res) {
 	});
 });
 
+//report all shares of a particular type
 //http://young-reaches-3985.herokuapp.com/shares/general
 app.get('/shares/:type', function(req, res) {
 	var object = req.body;
 	var collection = req.params.type
 	collectionDriver.findAll(collection, function(error, objs) {
+		if (error) {
+			res.send(400, error);
+		} else {
+			if (req.accepts('html')) {
+				res.render('data', {objects: objs, collection: collection});
+			} else {
+				res.set('Content-Type', 'application/json');
+				res.sent(200, objs);
+			}
+		}
+	});
+});
+
+//get the items shared with a userId
+app.get('/shares/:type/:userId', function(req, res) {
+	var object = req.body;
+	var collection = req.params.type
+	var userId = req.params.userId
+	collectionDriver.findSharedWithMe(collection, userId, function(error, objs) {
 		if (error) {
 			res.send(400, error);
 		} else {

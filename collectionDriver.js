@@ -54,6 +54,23 @@ CollectionDriver.prototype.get = function(collectionName, id, callback) {
 	});
 }
 
+
+CollectionDriver.prototype.findSharedWithMe = function(collectionName, userId, callback) {
+	this.getCollection(collectionName, function(error, the_collection) {
+		if (error) {
+			callback(error);
+		} else {
+			the_collection.find( {sharedUserIds : userId}, function(error, doc) {
+				if (error) {
+					callback(error);
+				} else {
+					callback(null, doc);
+				}
+			});
+		}
+	});
+}
+
 //save a new object
 CollectionDriver.prototype.save = function(collectionName, obj, callback) {
 	this.getCollection(collectionName, function(error, the_collection) {
