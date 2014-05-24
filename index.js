@@ -52,22 +52,22 @@ app.get('/:collection', function(req, res) {
 });
 
 //return a specific entity in a collection
-app.get('/:collection/:entity', function(req, res) {
-	var params = req.params;
-	var entity = params.entity;
-	var collection = params.collection;
-	if (entity) {
-		collectionDriver.get(collection, entity, function(error, objs) {
-			if (error) {
-				res.send(400, error);
-			} else {
-				res.send(200, objs);
-			}
-		});
-	} else {
-		res.send(400, {error: 'bad url', url: req.url});
-	}
-});
+// app.get('/:collection/:entity', function(req, res) {
+// 	var params = req.params;
+// 	var entity = params.entity;
+// 	var collection = params.collection;
+// 	if (entity) {
+// 		collectionDriver.get(collection, entity, function(error, objs) {
+// 			if (error) {
+// 				res.send(400, error);
+// 			} else {
+// 				res.send(200, objs);
+// 			}
+// 		});
+// 	} else {
+// 		res.send(400, {error: 'bad url', url: req.url});
+// 	}
+// });
 
 //post a new object to a collection
 app.post('/:collection', function(req, res) {
