@@ -52,22 +52,22 @@ app.get('/:collection', function(req, res) {
 });
 
 //return a specific entity in a collection
-// app.get('/:collection/:entity', function(req, res) {
-// 	var params = req.params;
-// 	var entity = params.entity;
-// 	var collection = params.collection;
-// 	if (entity) {
-// 		collectionDriver.get(collection, entity, function(error, objs) {
-// 			if (error) {
-// 				res.send(400, error);
-// 			} else {
-// 				res.send(200, objs);
-// 			}
-// 		});
-// 	} else {
-// 		res.send(400, {error: 'bad url', url: req.url});
-// 	}
-// });
+app.get('/:collection/:entity', function(req, res) {
+	var params = req.params;
+	var entity = params.entity;
+	var collection = params.collection;
+	if (entity) {
+		collectionDriver.get(collection, entity, function(error, objs) {
+			if (error) {
+				res.send(400, error);
+			} else {
+				res.send(200, objs);
+			}
+		});
+	} else {
+		res.send(400, {error: 'bad url', url: req.url});
+	}
+});
 
 //post a new object to a collection
 app.post('/:collection', function(req, res) {
@@ -82,7 +82,7 @@ app.post('/:collection', function(req, res) {
 	});
 });
 
-//curl -H "Content-Type: application/json" -X POST -d '{"title":"Hello Shares"}' http://young-reaches-3985.herokuapp.com/shares/general
+//post a Share object
 app.post('/shares/:type', function(req, res) {
 	var object = req.body;
 	var collection = req.params.type;
@@ -96,10 +96,9 @@ app.post('/shares/:type', function(req, res) {
 });
 
 //report all shares of a particular type
-//http://young-reaches-3985.herokuapp.com/shares/general
 app.get('/shares/:type', function(req, res) {
 	var object = req.body;
-	var collection = req.params.type
+	var collection = req.params.type;
 	collectionDriver.findAll(collection, function(error, objs) {
 		if (error) {
 			res.send(400, error);
@@ -116,9 +115,8 @@ app.get('/shares/:type', function(req, res) {
 
 //get the items shared with a userId
 app.get('/shares/:type/:userId', function(req, res) {
-	var object = req.body;
-	var collection = req.params.type
-	var userId = req.params.userId
+	var collection = req.params.type;
+	var userId = req.params.userId;
 	collectionDriver.findSharedWithMe(collection, userId, function(error, objs) {
 		if (error) {
 			res.send(400, error);
@@ -132,6 +130,19 @@ app.get('/shares/:type/:userId', function(req, res) {
 		}
 	});
 });
+
+app.post('shares/:type/', function(req, res) {
+	var object = req.body;
+	var collection = req.params.type;
+	var userId = req.params.userId;
+	collectionDriver.save(collection, object, function(error, docs) {
+		if (error) {
+			res.send(400, err);
+		} else {
+			res.send(201, docs);
+		}
+	})
+})
 
 //update an existing object
 app.put('/:collection/:entity', function(req, res) {
