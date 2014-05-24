@@ -1,0 +1,12 @@
+{
+	"userId" : 1,
+	"sharedUserIds" : [
+		5,
+		10,
+		15
+	],
+	"sharedObject" : {
+		"title" : "generic share",
+		"body" : "lorem ipsum"
+	}
+}
