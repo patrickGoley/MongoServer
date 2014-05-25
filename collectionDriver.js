@@ -62,6 +62,7 @@ CollectionDriver.prototype.findSharedWithMe = function(collectionName, userId, c
 		} else {
 			the_collection.find(
 				{
+					userId : {$ne :userId},
 					$or : [
 						{sharedUserIds : userId},
 						{isPublic : true}
