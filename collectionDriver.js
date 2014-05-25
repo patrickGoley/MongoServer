@@ -54,18 +54,23 @@ CollectionDriver.prototype.get = function(collectionName, id, callback) {
 	});
 }
 
-
+//find documents shared with my userId, or public documents
 CollectionDriver.prototype.findSharedWithMe = function(collectionName, userId, callback) {
 	this.getCollection(collectionName, function(error, the_collection) {
 		if (error) {
 			callback(error);
 		} else {
-			console.log("searching for shares with userId " + userId);
-			the_collection.find({"sharedUserIds" : userId}).toArray(function(error, results) {
+			the_collection.find(
+				{
+					$or : [
+						{sharedUserIds : userId},
+						{isPublic : true}
+					]
+				}
+			).toArray(function(error, results) {
 				if (error) {
 					callback(error);
 				} else {
-					console.log("found shares for userId " + results);
 					callback(null, results);
 				}
 			});
