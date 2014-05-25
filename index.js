@@ -142,9 +142,13 @@ app.delete("/:collection/:entity", function(req, res) {
 			if (error) {
 				res.send(400, error);
 			} else {
+				console.log("deleted object " + objs);
 				res.send(200, objs);
 			}
 		});
+	} else {
+		var error = { "message" : "Cannot DELETE a whole collection" };
+		res.send(400, error);
 	}
 });
 
