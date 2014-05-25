@@ -60,10 +60,12 @@ CollectionDriver.prototype.findSharedWithMe = function(collectionName, userId, c
 		if (error) {
 			callback(error);
 		} else {
+			console.log('searching for shares with userId' + userId);
 			the_collection.find({sharedUserIds : userId}).toArray(function(error, results) {
 				if (error) {
 					callback(error);
 				} else {
+					console.log('found shares for userId' + userId);
 					callback(null, results);
 				}
 			});
