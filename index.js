@@ -68,7 +68,7 @@ app.get('/shares/:type', function(req, res) {
 //get the items shared with a userId
 app.get('/shares/:type/:userId', function(req, res) {
 	var collection = req.params.type;
-	var userId = req.params.userId;
+	var userId = parseInt(req.params.userId);
 	collectionDriver.findSharedWithMe(collection, userId, function(error, objs) {
 		if (error) {
 			res.send(400, error);
