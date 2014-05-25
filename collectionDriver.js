@@ -66,6 +66,11 @@ CollectionDriver.prototype.findSharedWithMe = function(collectionName, userId, c
 						{sharedUserIds : userId},
 						{isPublic : true}
 					]
+				},
+				{
+					userId : 1,
+					sharedObject : 1,
+					_id : 0
 				}
 			).toArray(function(error, results) {
 				if (error) {

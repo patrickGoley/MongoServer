@@ -191,7 +191,7 @@
         <attribute name="redirectauthorization" type="bool">0</attribute>
         <attribute name="method" type="string">POST</attribute>
         <attribute name="followredirects" type="bool">0</attribute>
-        <attribute name="body" type="string">["{\\n\\t\\"userId\\" : 1,\\n\\t\\"sharedUserIds\\" : [\\n\\t\\t5\\n\\t],\\n\\t\\"isPublic\\" : true,\\n\\t\\"sharedObject\\" : {\\n\\t\\t\\"lat\\" : 36.123650,\\n\\t\\t\\"long\\" : -86.756521\\n\\t}\\n}"]</attribute>
+        <attribute name="body" type="string">["{\\n\\t\\"userId\\" : 4,\\n\\t\\"sharedUserIds\\" : [\\n\\t\\t5,\\n\\t\\t2\\n\\t],\\n\\t\\"isPublic\\" : false,\\n\\t\\"sharedObject\\" : {\\n\\t\\t\\"lat\\" : 36.123650,\\n\\t\\t\\"long\\" : -86.756521\\n\\t}\\n}"]</attribute>
         <attribute name="order" type="int64">0</attribute>
         <attribute name="name" type="string">POST Share Location</attribute>
         <relationship name="parent" type="0/1" destination="LMREQUESTTREEITEM" idrefs="z119"></relationship>
@@ -262,7 +262,7 @@
     </object>
     <object type="LMREQUEST" id="z123">
         <attribute name="uuid" type="string">CD51DA9B-E073-45EE-B1B2-8D1C8BE0C368</attribute>
-        <attribute name="url" type="string">http://young-reaches-3985.herokuapp.com/shares/location/5</attribute>
+        <attribute name="url" type="string">http://young-reaches-3985.herokuapp.com/shares/location/1</attribute>
         <attribute name="timeoutinterval" type="float">30</attribute>
         <attribute name="redirectmethod" type="bool">0</attribute>
         <attribute name="redirectauthorization" type="bool">0</attribute>
