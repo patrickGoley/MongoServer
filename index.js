@@ -59,7 +59,7 @@ app.get('/shares/:type', function(req, res) {
 				res.render('data', {objects: objs, collection: collection});
 			} else {
 				res.set('Content-Type', 'application/json');
-				res.sent(200, objs);
+				res.send(200, objs);
 			}
 		}
 	});
