@@ -114,6 +114,7 @@ CollectionDriver.prototype.delete = function(collectionName, entityId, callback)
 		} else {
 			the_collection.remove({'_id':ObjectID(entityId)}, function(error,doc) {
 				if (error) {
+					console.error("error deleting object " + entityId);
 					callback(error);
 				} else {
 					callback(null, doc);
