@@ -5,6 +5,7 @@
 		10,
 		15
 	],
+	"isPublic" : false,
 	"sharedObject" : {
 		"title" : "generic share",
 		"body" : "lorem ipsum"
